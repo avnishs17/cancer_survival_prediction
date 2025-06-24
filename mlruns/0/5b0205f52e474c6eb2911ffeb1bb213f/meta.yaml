@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/cancer_patient_survical_prediction/mlruns/0/5b0205f52e474c6eb2911ffeb1bb213f/artifacts
+end_time: 1750786115567
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5b0205f52e474c6eb2911ffeb1bb213f
+run_name: placid-trout-320
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750786101551
+status: 3
+tags: []
+user_id: avnish
