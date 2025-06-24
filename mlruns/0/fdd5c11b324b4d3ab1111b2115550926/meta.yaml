@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/cancer_patient_survical_prediction/mlruns/0/fdd5c11b324b4d3ab1111b2115550926/artifacts
+end_time: 1750785559373
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fdd5c11b324b4d3ab1111b2115550926
+run_name: classy-stoat-705
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750785530768
+status: 3
+tags: []
+user_id: avnish

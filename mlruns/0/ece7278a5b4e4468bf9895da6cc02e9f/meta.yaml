@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/cancer_patient_survical_prediction/mlruns/0/ece7278a5b4e4468bf9895da6cc02e9f/artifacts
+end_time: 1750785777706
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ece7278a5b4e4468bf9895da6cc02e9f
+run_name: amazing-donkey-667
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750785746163
+status: 3
+tags: []
+user_id: avnish

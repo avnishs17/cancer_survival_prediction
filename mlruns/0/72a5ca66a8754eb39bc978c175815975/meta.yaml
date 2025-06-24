@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/cancer_patient_survical_prediction/mlruns/0/72a5ca66a8754eb39bc978c175815975/artifacts
+end_time: 1750785479092
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 72a5ca66a8754eb39bc978c175815975
+run_name: righteous-skink-700
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750785479024
+status: 4
+tags: []
+user_id: avnish

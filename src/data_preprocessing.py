@@ -62,7 +62,7 @@ class DataProcessing:
                     "Chi2 Score" : chi2_selector.scores_
                 }).sort_values(by='Chi2 Score' , ascending=False)
             
-            top_features = chi2_scores.head(15)["Feature"].tolist()
+            top_features = chi2_scores.head(5)["Feature"].tolist()
             self.selected_features = top_features
             logger.info(f"Selected features are : {self.selected_features}")
 
