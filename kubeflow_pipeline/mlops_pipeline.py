@@ -27,7 +27,7 @@ def add_dagshub_env(op: dsl.ContainerOp):
 def data_processing_op():
     op = dsl.ContainerOp(
         name="Data Processing",
-        image="avnishsingh17/cancer_survival2:latest",
+        image="avnishsingh17/cancer_survival:latest",
         command=["python", "src/data_preprocessing.py"]
     )
     return add_dagshub_env(op)

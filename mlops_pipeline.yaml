@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   generateName: mlops-pipeline-
-  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.22, pipelines.kubeflow.org/pipeline_compilation_time: '2025-06-25T14:31:34.894735',
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.22, pipelines.kubeflow.org/pipeline_compilation_time: '2025-06-25T14:58:16.531392',
     pipelines.kubeflow.org/pipeline_spec: '{"description": "This is a Kubeflow pipeline",
       "name": "MLOps pipeline"}'}
   labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.22}
@@ -19,7 +19,7 @@ spec:
       - name: DAGSHUB_TOKEN
         valueFrom:
           secretKeyRef: {key: DAGSHUB_TOKEN, name: dagshub-secret}
-      image: avnishsingh17/cancer_survival2:latest
+      image: avnishsingh17/cancer_survival:latest
     metadata:
       labels:
         pipelines.kubeflow.org/kfp_sdk_version: 1.8.22

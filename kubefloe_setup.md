@@ -53,7 +53,7 @@ CertUtil -hashfile kubectl.exe SHA256
 type kubectl.exe.sha256
 Using PowerShell to automate the verification using the -eq operator to get a True or False result:
 
- $(Get-FileHash -Algorithm SHA256 .\kubectl.exe).Hash -eq $(Get-Content .\kubectl.exe.sha256)
+$(Get-FileHash -Algorithm SHA256 .\kubectl.exe).Hash -eq $(Get-Content .\kubectl.exe.sha256)
 Append or prepend the kubectl binary folder to your PATH environment variable.
 
 Test to ensure the version of kubectl is the same as downloaded:
