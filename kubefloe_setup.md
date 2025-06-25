@@ -145,3 +145,62 @@ To uninstall Kubeflow Pipelines using manifests from your local repository or fi
 
 kubectl delete -k manifests/kustomize/env/platform-agnostic
 kubectl delete -k manifests/kustomize/cluster-scoped-resources
+
+
+
+
+
+
+
+#solution
+
+
+1. Clone the Kubeflow Pipelines repo manually
+Open PowerShell and run:
+
+powershell
+
+git clone --branch 2.4.0 https://github.com/kubeflow/pipelines.git
+This will create a local pipelines folder.
+
+2. Apply the cluster-scoped resources locally
+powershell
+
+kubectl apply -k .\pipelines\manifests\kustomize\cluster-scoped-resources
+3. Wait for CRDs to be established (optional but recommended)
+powershell
+
+kubectl wait --for condition=established --timeout=60s crd/applications.app.k8s.io
+Ignore this step if the CRD doesn’t exist or was removed in 2.4.0.
+
+4. Apply platform-agnostic components
+powershell
+
+kubectl apply -k .\pipelines\manifests\kustomize\env\platform-agnostic
+
+
+## 🧹 Remove Kubeflow Pipelines Completely (Minikube/Kubernetes)
+
+```powershell
+# 1. Delete platform-agnostic components
+kubectl delete -k .\pipelines\manifests\kustomize\env\platform-agnostic
+
+# 2. Delete cluster-scoped resources
+kubectl delete -k .\pipelines\manifests\kustomize\cluster-scoped-resources
+
+# 3. Delete leftover PVCs (Persistent Volume Claims)
+kubectl delete pvc --all -n kubeflow
+
+# 4. Delete the kubeflow namespace entirely (removes all related resources)
+kubectl delete namespace kubeflow
+
+# 5. Delete remaining Custom Resource Definitions (CRDs) if present
+kubectl get crd | findstr pipeline
+kubectl delete crd scheduledworkflows.kubeflow.org viewers.kubeflow.org
+
+# 6. Optionally clean up leftover configmaps, secrets, or services
+kubectl get all -A | findstr pipeline
+# Manually delete any resources if still listed
+
+# 7. Delete the cloned Kubeflow Pipelines directory from your system
+Remove-Item -Recurse -Force .\pipelines
