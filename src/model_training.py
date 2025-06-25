@@ -5,7 +5,18 @@ from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score
 from src.logger import get_logger
 from src.custom_exception import CustomException
 import dagshub
-dagshub.init(repo_owner='avnishs17', repo_name='cancer', mlflow=True)
+
+print("DEBUG: DAGSHUB_USERNAME:", os.getenv("DAGSHUB_USERNAME"))
+print("DEBUG: DAGSHUB_TOKEN present:", bool(os.getenv("DAGSHUB_TOKEN")))
+
+import dagshub
+dagshub.init(
+    repo_owner=os.getenv("DAGSHUB_USERNAME"),
+    repo_name="cancer",
+    mlflow=True,
+    token=os.getenv("DAGSHUB_TOKEN")
+)
+
 
 import mlflow
 import mlflow.sklearn

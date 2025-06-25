@@ -8,5 +8,5 @@ matplotlib
 seaborn
 mlflow
 dagshub 
-kfp
+kfp==1.8.22
 ipykernel

@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: mlops-pipeline-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.22, pipelines.kubeflow.org/pipeline_compilation_time: '2025-06-25T14:31:34.894735',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "This is a Kubeflow pipeline",
+      "name": "MLOps pipeline"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.22}
+spec:
+  entrypoint: mlops-pipeline
+  templates:
+  - name: data-processing
+    container:
+      command: [python, src/data_preprocessing.py]
+      env:
+      - name: DAGSHUB_USERNAME
+        valueFrom:
+          secretKeyRef: {key: DAGSHUB_USERNAME, name: dagshub-secret}
+      - name: DAGSHUB_TOKEN
+        valueFrom:
+          secretKeyRef: {key: DAGSHUB_TOKEN, name: dagshub-secret}
+      image: avnishsingh17/cancer_survival2:latest
+    metadata:
+      labels:
+        pipelines.kubeflow.org/kfp_sdk_version: 1.8.22
+        pipelines.kubeflow.org/pipeline-sdk-type: kfp
+        pipelines.kubeflow.org/enable_caching: "true"
+  - name: mlops-pipeline
+    dag:
+      tasks:
+      - {name: data-processing, template: data-processing}
+      - name: model-training
+        template: model-training
+        dependencies: [data-processing]
+  - name: model-training
+    container:
+      command: [python, src/model_training.py]
+      env:
+      - name: DAGSHUB_USERNAME
+        valueFrom:
+          secretKeyRef: {key: DAGSHUB_USERNAME, name: dagshub-secret}
+      - name: DAGSHUB_TOKEN
+        valueFrom:
+          secretKeyRef: {key: DAGSHUB_TOKEN, name: dagshub-secret}
+      image: avnishsingh17/cancer_survival:latest
+    metadata:
+      labels:
+        pipelines.kubeflow.org/kfp_sdk_version: 1.8.22
+        pipelines.kubeflow.org/pipeline-sdk-type: kfp
+        pipelines.kubeflow.org/enable_caching: "true"
+  arguments:
+    parameters: []
+  serviceAccountName: pipeline-runner
