@@ -9,16 +9,16 @@ def add_dagshub_env(op: dsl.ContainerOp):
                 name='DAGSHUB_USERNAME',
                 value_from=V1EnvVarSource(
                     secret_key_ref=V1SecretKeySelector(
-                        name='dagshub-secret',  # Name of your Kubernetes Secret
-                        key='DAGSHUB_USERNAME'  # Key inside that secret
+                        name='dagshub-secret',  
+                        key='DAGSHUB_USERNAME'  
                     )
                 )
             )).add_env_variable(V1EnvVar(
-                name='DAGSHUB_TOKEN',
+                name='DAGSHUB_USER_TOKEN',  
                 value_from=V1EnvVarSource(
                     secret_key_ref=V1SecretKeySelector(
                         name='dagshub-secret',
-                        key='DAGSHUB_TOKEN'
+                        key='DAGSHUB_USER_TOKEN'  
                     )
                 )
             ))

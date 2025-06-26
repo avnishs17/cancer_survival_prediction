@@ -7,6 +7,5 @@ joblib
 matplotlib
 seaborn
 mlflow
-dagshub 
 kfp==1.8.22
 ipykernel

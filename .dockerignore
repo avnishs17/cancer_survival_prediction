@@ -1,0 +1,5 @@
+venv/*
+env/*
+cancer_survival.egg-info
+logs/*
+__pycache__/*

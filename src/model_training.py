@@ -4,22 +4,30 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,roc_auc_score
 from src.logger import get_logger
 from src.custom_exception import CustomException
-import dagshub
-
-print("DEBUG: DAGSHUB_USERNAME:", os.getenv("DAGSHUB_USERNAME"))
-print("DEBUG: DAGSHUB_TOKEN present:", bool(os.getenv("DAGSHUB_TOKEN")))
-
-import dagshub
-dagshub.init(
-    repo_owner=os.getenv("DAGSHUB_USERNAME"),
-    repo_name="cancer",
-    mlflow=True,
-    token=os.getenv("DAGSHUB_TOKEN")
-)
-
-
 import mlflow
 import mlflow.sklearn
+
+print("DEBUG: DAGSHUB_USERNAME:", os.getenv("DAGSHUB_USERNAME"))
+print("DEBUG: DAGSHUB_USER_TOKEN present:", bool(os.getenv("DAGSHUB_USER_TOKEN")))
+
+# Configure MLflow to use DagHub tracking server directly
+dagshub_username = os.getenv("DAGSHUB_USERNAME")
+dagshub_token = os.getenv("DAGSHUB_USER_TOKEN")  # DagHub expects DAGSHUB_USER_TOKEN
+
+if dagshub_username and dagshub_token:
+    # Set DagHub authentication environment variable
+    os.environ["DAGSHUB_USER_TOKEN"] = dagshub_token
+    
+    # Set MLflow tracking URI to DagHub
+    mlflow.set_tracking_uri(f"https://dagshub.com/{dagshub_username}/cancer.mlflow")
+    
+    # Set authentication environment variables for MLflow
+    os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_username
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+    
+    print(f"MLflow tracking URI set to: https://dagshub.com/{dagshub_username}/cancer.mlflow")
+else:
+    print("Warning: DagHub credentials not found, using local MLflow tracking")
 
 logger = get_logger(__name__)
 
